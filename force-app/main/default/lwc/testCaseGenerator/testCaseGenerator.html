@@ -1,0 +1,59 @@
+<template>
+    <lightning-card title="Generate Your Test Cases" icon-name="action:new_note">
+        <div class="slds-p-around_medium">
+            <label class="slds-form-element__label" for="inputArea">
+                <strong>Kindly input your requirements in the text box provided below. </strong>
+                <lightning-helptext content="You can provide additional instructions for each column as well in the text box. Example: 'Use Owner Full Name as John Doe'"></lightning-helptext>
+            </label>
+            <div class="slds-form-element__control">
+                <lightning-textarea 
+                    id="inputArea"
+                    placeholder="Enter the data here..."
+                    value={inputData}
+                    onchange={handleInputChange}>
+                </lightning-textarea>
+            </div>
+            <div class="slds-m-top_medium"></div>
+            <lightning-radio-group
+                label="Select the Type of the response"
+                placeholder="Select an option"
+                options={options}
+                value={selectedOption}
+                onchange={handleOptionChange}>
+                type="radio"
+                required
+            </lightning-radio-group>
+            <div class="slds-m-top_medium">
+                <lightning-button 
+                    label="Process Data" 
+                    variant="brand" 
+                    onclick={processData}
+                    disabled={isProcessButtonDisabled}>
+                </lightning-button>
+                <lightning-button 
+                    label="Copy Table Content" 
+                    variant="neutral" 
+                    onclick={copyTableContent}
+                    disabled={isCopyButtonDisabled}>
+                </lightning-button>
+            </div>
+            <template if:true={isProcessing}>
+                <p class="slds-text-body_small slds-m-top_small">
+                    We are processing your request. Please wait.
+                </p>
+            </template>
+            <div>
+                <p class="slds-text-body_small slds-m-top_small">
+                    This tool uses Generative AI and can produce inaccurate response. Please review the output for accuracy.
+                </p>
+            </div>
+        </div>
+        <template if:true={tableData}>
+            <lightning-datatable 
+                key-field="id" 
+                data={tableData} 
+                columns={displayColumn}>
+            </lightning-datatable>
+        </template>
+    </lightning-card>
+</template>
