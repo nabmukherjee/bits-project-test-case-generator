@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <brand>
+        <headerColor>#0070D2</headerColor>
+        <logo>Gemini_Generated_Image_yuj81tyuj81t</logo>
+        <logoVersion>1</logoVersion>
+        <shouldOverrideOrgTheme>false</shouldOverrideOrgTheme>
+    </brand>
+    <formFactors>Small</formFactors>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>true</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>true</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
+    <isOmniPinnedViewEnabled>false</isOmniPinnedViewEnabled>
+    <label>Test Case Generator</label>
+    <navType>Standard</navType>
+    <tabs>Test_Case_Generator</tabs>
+    <tabs>Test_Case_Generator_Log__c</tabs>
+    <uiType>Lightning</uiType>
+    <utilityBar>Test_Case_Generator_UtilityBar</utilityBar>
+</CustomApplication>
