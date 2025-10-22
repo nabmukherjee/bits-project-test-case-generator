@@ -1,0 +1,213 @@
+/* Main container styling */
+.slds-card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    border: 1px solid #e5e5e5;
+}
+
+/* Form elements styling */
+.slds-form-element__label {
+    font-weight: 600;
+    color: #3e3e3c;
+    margin-bottom: 0.5rem;
+}
+
+.slds-form-element__label strong {
+    color: #0176d3;
+}
+
+/* Textarea styling */
+lightning-textarea {
+    --slds-c-textarea-sizing-border: 2px solid #dddbda;
+    --slds-c-textarea-color-border-focus: #0176d3;
+}
+
+lightning-textarea textarea {
+    min-height: 120px;
+    border-radius: 6px;
+    transition: border-color 0.2s ease-in-out;
+    font-family: 'Salesforce Sans', Arial, sans-serif;
+}
+
+lightning-textarea textarea:focus {
+    box-shadow: 0 0 0 2px rgba(1, 118, 211, 0.2);
+}
+
+/* Radio group styling */
+lightning-radio-group {
+    margin-top: 1rem;
+}
+
+lightning-radio-group .slds-form-element__label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #444;
+}
+
+/* Button container */
+.slds-m-top_medium {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+/* Button styling */
+lightning-button {
+    --slds-c-button-brand-color-background: #0176d3;
+    --slds-c-button-brand-color-background-hover: #014486;
+    --slds-c-button-brand-color-background-active: #032d60;
+}
+
+lightning-button[variant="brand"] {
+    transition: all 0.2s ease-in-out;
+}
+
+lightning-button[variant="brand"]:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(1, 118, 211, 0.3);
+}
+
+lightning-button[variant="neutral"] {
+    --slds-c-button-neutral-color-border: #747474;
+    --slds-c-button-neutral-color-background-hover: #f3f3f3;
+    transition: all 0.2s ease-in-out;
+}
+
+lightning-button[variant="neutral"]:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Processing message styling */
+.slds-text-body_small {
+    font-style: italic;
+    color: #706e6b;
+    font-size: 0.8125rem;
+    line-height: 1.4;
+}
+
+
+/* Disclaimer message styling */
+.slds-text-body_small:last-of-type {
+    background-color: #fef7e6;
+    border-left: 4px solid #fe9339;
+    padding: 0.75rem;
+    border-radius: 4px;
+    color: #8c4301;
+    font-size: 0.75rem;
+    margin-top: 1rem;
+}
+
+/* Data table container */
+lightning-datatable {
+    margin-top: 1.5rem;
+    border: 1px solid #dddbda;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Data table header styling */
+lightning-datatable table thead th {
+    background-color: #f8f9fb;
+    border-bottom: 2px solid #dddbda;
+    font-weight: 600;
+    color: #3e3e3c;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+    padding: 1rem 0.75rem;
+}
+
+/* Data table row styling */
+lightning-datatable table tbody tr {
+    transition: background-color 0.2s ease-in-out;
+}
+
+lightning-datatable table tbody tr:hover {
+    background-color: #f8f9fb;
+}
+
+lightning-datatable table tbody td {
+    padding: 0.875rem 0.75rem;
+    border-bottom: 1px solid #f1f1f1;
+    vertical-align: top;
+    word-wrap: break-word;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .slds-m-top_medium {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    lightning-button {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+    
+    lightning-textarea textarea {
+        min-height: 100px;
+    }
+}
+
+/* Help text styling */
+lightning-helptext {
+    margin-left: 0.5rem;
+}
+
+/* Focus states for better accessibility */
+lightning-button:focus-visible,
+lightning-textarea:focus-visible,
+lightning-radio-group:focus-visible {
+    outline: 2px solid #0176d3;
+    outline-offset: 2px;
+}
+
+/* Loading state styling */
+.slds-is-loading {
+    position: relative;
+}
+
+.slds-is-loading::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    pointer-events: none;
+}
+
+/* Card header enhancement */
+.slds-card__header {
+    background: linear-gradient(135deg, #0176d3 0%, #005fb2 100%);
+    color: white;
+    border-radius: 8px 8px 0 0;
+}
+
+.slds-card__header .slds-card__header-title {
+    color: white;
+    font-weight: 600;
+}
+
+/* Form container padding adjustment */
+.slds-p-around_medium {
+    padding: 1.5rem;
+}
+
+/* Enhanced spacing for better visual hierarchy */
+.slds-form-element__control {
+    margin-bottom: 1rem;
+}
+
+/* Button disabled state styling */
+lightning-button[disabled] {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+}
