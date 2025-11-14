@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPromptTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <activeVersionIdentifier>k/hqsx1kvKnMLKaG1sacoh+rNf8X2pjszghPWQY2tCc=_1</activeVersionIdentifier>
+    <developerName>Test_Case_Generation_Template_GUS</developerName>
+    <masterLabel>Test Cases Preparation Template - GUS</masterLabel>
+    <templateVersions>
+        <content>User will provide a free text and we will need to generate the test cases based on below values. Create a table out of these columns and fill the values. 
+
+{!$Input:requirement}
+
+Work ID
+Test Suite Name
+Test Suite Description
+Test Scenario Name
+Test Scenario Details
+Expected Results
+Execution Type
+Priority
+
+Consider below things during test cases generation. Cover all the corner and edge cases as well. Don&apos;t create only 1 test case. Cover positive and negative test cases. 
+1. For Work ID - User should provide the Work Id as input but it&apos;s not mandatory. if work Id is not present, keep the field as W-XXXXXXXX. It can also be called as User story number or work item. If Work Id/User Story/Work Item is present take the same value for every row. 
+2. Priority - Priority should be P1,P2,P3 where P1 being highest and P3 being lowest. Arrange the test cases in high (P1) to low priority always.
+3. Test Scenario Name - Test Scenario name should start like &quot;TC001 - &quot;. Test Scenario Name should not be more than 255 characters.
+4. Test Suite Description - Test Suite Description should be same for all.
+5. Test Scenario Details - Test Scenario Details should be as descriptive as possible. Add pre-requisite first which can be data creation or something important which should be done before starting with Test Scenario. After that in the new line add Test Scenario Steps and these steps should be in numbering format. In the Test Scenario Details, mention the user also (if present in the input) from which testing is supposed to be done. Mention the Object name of Salesforce platform on which testing is supposed to be done.
+6. Expected Results - Expected Result should be detailed. Expected result should be as per the steps present in Test Scenario Details.
+7. Execution Type - Execution Type should always be Manual unless specifically mentioned in the input. But values can be any one from Manual, Automated, Cannot be automated.
+
+Generate the result using single pipe as a separator for each column and the values and no extra row. Don&apos;t add the headers in the response. 
+
+Do not include blank rows.
+Generate multiple test cases—not just one.
+Ensure maximum coverage, including:
+ - Edge and corner cases
+ - Positive and negative scenarios
+</content>
+        <inputs>
+            <apiName>requirement</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>requirement</masterLabel>
+            <referenceName>Input:requirement</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>k/hqsx1kvKnMLKaG1sacoh+rNf8X2pjszghPWQY2tCc=_1</versionIdentifier>
+    </templateVersions>
+    <type>einstein_gpt__flex</type>
+    <visibility>Global</visibility>
+</GenAiPromptTemplate>

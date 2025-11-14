@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPromptTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <activeVersionIdentifier>k/hqsx1kvKnMLKaG1sacoh+rNf8X2pjszghPWQY2tCc=_2</activeVersionIdentifier>
+    <developerName>Test_Case_Generation_Template_Narwhale</developerName>
+    <masterLabel>Test Cases Preparation Template - Narwhale</masterLabel>
+    <templateVersions>
+        <content>User will provide a free text and we will need to generate the test cases based on below values. Create a table out of these columns and fill the values. 
+
+{!$Input:requirement}
+
+Work ID
+Test Suite Name
+Test Suite Description
+Test Scenario Name
+Test Scenario Details
+Expected Results
+Execution Type
+Priority
+
+Consider below things during test cases generation. Cover all the corner and edge cases as well. Don&apos;t create only 1 test case. Cover positive and negative test cases. 
+1. For Work ID - User should provide the Work Id as input but it&apos;s not mandatory. if work Id is not present, keep the field as W-XXXXXXXX. It can also be called as User story number or work item. If Work Id/User Story/Work Item is present take the same value for every row. 
+2. Priority - Priority should be P1,P2,P3 where P1 being highest and P3 being lowest. Arrange the test cases in high (P1) to low priority always.
+3. Test Scenario Name - Test Scenario name should start like &quot;TC001 - &quot;. Test Scenario Name should not be more than 255 characters.
+4. Test Suite Description - Test Suite Description should be same for all.
+5. Test Scenario Details - Test Scenario Details should be as descriptive as possible. Add pre-requisite first which can be data creation or something important which should be done before starting with Test Scenario. After that in the new line add Test Scenario Steps and these steps should be in numbering format. In the Test Scenario Details, mention the user also (if present in the input) from which testing is supposed to be done. Mention the Object name of Salesforce platform on which testing is supposed to be done.
+6. Expected Results - Expected Result should be detailed. Expected result should be as per the steps present in Test Scenario Details.
+7. Execution Type - Execution Type should always be Manual unless specifically mentioned in the input. But values can be any one from Manual, Automated, Cannot be automated.
+
+Generate the result using single pipe as a separator for each column and the values and no extra row. Don&apos;t add the headers in the response. 
+
+Do not include blank rows.
+Generate multiple test cases—not just one.
+Ensure maximum coverage, including:
+ - Edge and corner cases
+ - Positive and negative scenarios
+</content>
+        <inputs>
+            <apiName>requirement</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>requirement</masterLabel>
+            <referenceName>Input:requirement</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>k/hqsx1kvKnMLKaG1sacoh+rNf8X2pjszghPWQY2tCc=_1</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>User will provide a free text and we will need to generate the test cases based on below input from user and below guardrails. Create a table out of these columns and fill the values. 
+
+{!$Input:requirement}
+
+Test Case Name
+Project
+Owner Full Name
+Owner ID
+Organization
+Execution Status
+Planned Execution Date
+BT Release
+GUS Work Item ID
+Test Case Details
+Detail Steps
+Expected Result
+
+Consider below things during test cases generation.
+
+1. Test Case Name - Test Scenario name should start like &quot;TC001 - &quot;. Post that it should increase like TC001..., TC002... like this. Test Scenario Name should not be more than 80 characters.
+2. Project - If user provides any value populate that value otherwise populate this field as blank.
+3. Owner Full Name - If user provides any value populate that value otherwise populate this field as blank. User Provided Input Example &quot;Use Owner Full Name as Anirudhya Bhattacharjee&quot;. Don&apos;t add anything if user is not asking specifically. 
+4. Owner ID - If user provides any value populate that value otherwise populate this field as blank. User Provided Input Example &quot;Use Owner Id as 0053y00000Gi2CFAAZ&quot;. Don&apos;t add anything if user is not asking specifically. 
+5. Organization - If user provides any value populate that value otherwise populate this field as blank.
+6. Execution Status - Execution Status should always be Not Started. 
+7. Planned Execution Date - If user provides any value populate that value otherwise populate this field as blank.
+8. BT Release - If user provides any value populate that value otherwise populate this field as blank.
+9. GUS Work Item ID - User should provide the Work Id as input but it&apos;s not mandatory. if work Id is not present, keep the field as W-XXXXXXXX. It can also be called as User story number or work item. If Work Id/User Story/Work Item is present take the same value for every row.  
+10. Test Case Details - Test Case Details should be high level information including 3 things. First is a good detailed name of the step. Second is pre-requisite, which can contain the things which are needed before we can start testing like some setting or some setup which is needed should be present. Third is the necessary things to keep in mind while testing, like user which should be used for testing, sandbox (like QA and UAT if mentioned in the input else do not mention in the output), and data setup. Add more details which can be added based upon the requirement given in the input.
+11. Detail Steps - Details Steps should be as descriptive as possible for the test case. This should contain all the steps one by one which user needs to perform to complete the testing. Each detailed step should be added in numbering format. It should clearly mention the activity which a user is supposed to do for each step. Maximum length should be of 5,000 characters. If Owner Full Name/Owner Name is provided in the input don&apos;t consider that to generate the output for this column. 
+12. Expected Result - Expected Result should be detailed. It should be against each step in Detail Steps if needed and clearly mention the things which a user is supposed to check. Maximum length should be of 2,500 characters. If Owner Full Name/Owner Name is provided in the input don&apos;t consider that to generate the output for this column. 
+
+If User is providing Owner Full Name/Owner Name in the input populate that value ONLY in the Owner Full Name column. 
+
+Along with these if user gives any particular instruction for a field, follow that to generate output.
+
+Generate the result using single pipe as a separator for each column and the values and no extra row. Don&apos;t add headers in the response.
+
+Do not include blank rows.
+Generate multiple test cases—not just one.
+Ensure maximum coverage, including:
+ - Edge and corner cases
+ - Positive and negative scenarios
+
+</content>
+        <inputs>
+            <apiName>requirement</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>requirement</masterLabel>
+            <referenceName>Input:requirement</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>k/hqsx1kvKnMLKaG1sacoh+rNf8X2pjszghPWQY2tCc=_2</versionIdentifier>
+    </templateVersions>
+    <type>einstein_gpt__flex</type>
+    <visibility>Global</visibility>
+</GenAiPromptTemplate>

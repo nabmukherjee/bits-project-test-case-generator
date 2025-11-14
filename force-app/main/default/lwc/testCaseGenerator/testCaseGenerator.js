@@ -7,6 +7,7 @@ export default class TestCaseGenerator extends LightningElement {
     @track options = [
         { label: 'GUS', value: 'GUS' },
         { label: 'Narwhale', value: 'Narwhale' },
+        { label: 'Gherkin', value: 'Gherkin' },
     ];
     @track selectedOption = '';
     @track tableData = []; // Processed data for datatable
@@ -23,20 +24,6 @@ export default class TestCaseGenerator extends LightningElement {
         { label: 'Priority', fieldName: 'priority', wrapText: true },
     ];
 
-    /*columns_narwhale = [
-        { label: 'Work ID', fieldName: 'workId', wrapText: true },
-        { label: 'Test Case Name', fieldName: 'testCaseName', wrapText: true },
-        { label: 'Test Case Details', fieldName: 'testCaseDetails', wrapText: true },
-        { label: 'Detail Steps', fieldName: 'detailSteps', wrapText: true },
-        { label: 'Expected Result', fieldName: 'expectedResults', wrapText: true },
-        { label: 'Execution Status', fieldName: 'executionStatus', wrapText: true },
-        { label: 'Owner Full Name', fieldName: 'ownerName', wrapText: true },
-        { label: 'Owner ID', fieldName: 'ownerId', wrapText: true },
-        { label: 'Planned Execution Date', fieldName: 'executionDate', wrapText: true },
-        { label: 'Upload Identifier', fieldName: 'uploadIdentifier', wrapText: true },
-        { label: 'Project', fieldName: 'project', wrapText: true }
-    ];*/
-
     columns_narwhale = [
         { label: 'Test Case Name', fieldName: 'testCaseName', wrapText: true },
         { label: 'Project', fieldName: 'project', wrapText: true },
@@ -51,6 +38,20 @@ export default class TestCaseGenerator extends LightningElement {
         { label: 'Detail Steps', fieldName: 'detailSteps', wrapText: true },
         { label: 'Expected Result', fieldName: 'expectedResults', wrapText: true }
     ];
+    
+    columns_gherkin = [
+        { label: 'Feature Name', fieldName: 'featureName', wrapText: true },
+        { label: 'Scenario ID', fieldName: 'scenarioId', wrapText: true },
+        { label: 'Scenario Name', fieldName: 'scenarioName', wrapText: true },
+        { label: 'Scenario Type', fieldName: 'scenarioType', wrapText: true },
+        { label: 'Given Steps', fieldName: 'givenSteps', wrapText: true },
+        { label: 'When Steps', fieldName: 'whenSteps', wrapText: true },
+        { label: 'Then Steps', fieldName: 'thenSteps', wrapText: true },
+        { label: 'Examples Table', fieldName: 'examplesTable', wrapText: true },
+        { label: 'Owner Full Name', fieldName: 'ownerName', wrapText: true },
+        { label: 'Project', fieldName: 'project', wrapText: true },
+        { label: 'Work Item ID', fieldName: 'workId', wrapText: true }
+    ];
 
     // Determines if the Process Data button should be disabled
     get isProcessButtonDisabled() {
@@ -63,7 +64,7 @@ export default class TestCaseGenerator extends LightningElement {
     }
 
     get displayColumn() {
-        return this.selectedOption === 'GUS' ? [...this.columns_gus] : this.selectedOption === 'Narwhale' ? [...this.columns_narwhale] : '';
+        return this.selectedOption === 'GUS' ? [...this.columns_gus] : this.selectedOption === 'Narwhale' ? [...this.columns_narwhale] : this.selectedOption === 'Gherkin' ? [...this.columns_gherkin] : '';
     }
 
     // Handles changes in the textarea
@@ -110,7 +111,10 @@ export default class TestCaseGenerator extends LightningElement {
     
         let dataRows = this.selectedOption === 'GUS'
             ? this.tableData.map(row => this.columns_gus.map(col => row[col.fieldName] || '').join('\t'))
-            : this.tableData.map(row => this.columns_narwhale.map(col => row[col.fieldName] || '').join('\t'));
+            : this.selectedOption === 'Narwhale'
+            ? this.tableData.map(row => this.columns_narwhale.map(col => row[col.fieldName] || '').join('\t'))
+            : this.selectedOption === 'Gherkin'
+            ? this.tableData.map(row => this.columns_gherkin.map(col => row[col.fieldName] || '').join('\t')):"";
     
         const clipboardContent = dataRows.join('\n');
     

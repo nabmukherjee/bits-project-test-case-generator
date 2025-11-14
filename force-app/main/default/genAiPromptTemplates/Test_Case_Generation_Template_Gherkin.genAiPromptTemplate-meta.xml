@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPromptTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <activeVersionIdentifier>k/hqsx1kvKnMLKaG1sacoh+rNf8X2pjszghPWQY2tCc=_2</activeVersionIdentifier>
+    <developerName>Test_Case_Generation_Template_Gherkin</developerName>
+    <masterLabel>Test Cases Preparation Template - Gherkin</masterLabel>
+    <templateVersions>
+        <content>User will provide a free text and we will need to generate the test cases based on below values. Create a table out of these columns and fill the values. 
+
+{!$Input:requirement}
+
+Work ID
+Test Suite Name
+Test Suite Description
+Test Scenario Name
+Test Scenario Details
+Expected Results
+Execution Type
+Priority
+
+Consider below things during test cases generation. Cover all the corner and edge cases as well. Don&apos;t create only 1 test case. Cover positive and negative test cases. 
+1. For Work ID - User should provide the Work Id as input but it&apos;s not mandatory. if work Id is not present, keep the field as W-XXXXXXXX. It can also be called as User story number or work item. If Work Id/User Story/Work Item is present take the same value for every row. 
+2. Priority - Priority should be P1,P2,P3 where P1 being highest and P3 being lowest. Arrange the test cases in high (P1) to low priority always.
+3. Test Scenario Name - Test Scenario name should start like &quot;TC001 - &quot;. Test Scenario Name should not be more than 255 characters.
+4. Test Suite Description - Test Suite Description should be same for all.
+5. Test Scenario Details - Test Scenario Details should be as descriptive as possible. Add pre-requisite first which can be data creation or something important which should be done before starting with Test Scenario. After that in the new line add Test Scenario Steps and these steps should be in numbering format. In the Test Scenario Details, mention the user also (if present in the input) from which testing is supposed to be done. Mention the Object name of Salesforce platform on which testing is supposed to be done.
+6. Expected Results - Expected Result should be detailed. Expected result should be as per the steps present in Test Scenario Details.
+7. Execution Type - Execution Type should always be Manual unless specifically mentioned in the input. But values can be any one from Manual, Automated, Cannot be automated.
+
+Generate the result using single pipe as a separator for each column and the values and no extra row. Don&apos;t add the headers in the response. 
+
+Do not include blank rows.
+Generate multiple test cases—not just one.
+Ensure maximum coverage, including:
+ - Edge and corner cases
+ - Positive and negative scenarios
+
+
+
+</content>
+        <inputs>
+            <apiName>requirement</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>requirement</masterLabel>
+            <referenceName>Input:requirement</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>k/hqsx1kvKnMLKaG1sacoh+rNf8X2pjszghPWQY2tCc=_1</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You will be given a free-text Requirement by the user.  Using that Requirement and the instructions below, generate a complete set of Gherkin-format test cases (Scenario and Scenario Outlines) suitable for Cucumber execution. Create a table out of these columns and fill the values.
+
+{!$Input:requirement}
+
+Feature Name
+Scenario ID
+Scenario Name
+Scenario Type
+Given Steps
+When Steps
+Then Steps
+Examples Table
+Owner Full Name
+Project
+Work Item ID
+
+
+### FOLLOW ALL THESE RULES STRICTLY:
+
+1. **Output Format**
+  - Output should consist ONLY of Gherkin syntax.
+  - Include:
+   - `Feature:` section
+   - Multiple `Scenario:` and `Scenario Outline:` blocks
+   - `Given/When/Then/And` steps
+  - No explanations, no text outside the Gherkin.
+
+2. **Feature Name**
+  - Derive a meaningful and concise Feature title from the Requirement.
+  - Keep it under 80 characters.
+
+3. **Test Case Name**
+  - Test Case names must start with:
+   - `TC001 -`, `TC002 -`, `TC003 -` … sequentially.
+  - Max 80 characters each.
+  - Cover:
+   - Positive flows
+   - Negative flows
+   - Edge cases
+   - Corner cases
+   - Validation errors
+   - System limits where relevant
+   - Permission/role-based behavior if applicable.
+
+4. **Scenario Coverage**
+  Include all applicable test types:
+  - CRUD flows (if relevant)
+  - UI interactions
+  - API interactions (if applicable)
+  - Data validation rules
+  - Boundary value tests
+  - Error-handling
+  - Field-level rules
+  - Workflow/Apex/Flow automation behavior
+  - Integration-related behavior
+  - Security/visibility behavior
+  - Multi-user scenarios (if applicable)
+  - Record locking or concurrency cases (if applicable)
+  - Unique constraint cases
+  - Optional inputs and missing mandatory fields
+  - Sandbox-specific behaviors ONLY if explicitly mentioned.
+
+5. **Owner / Project / Work Item Handling**
+  - If the user provides Owner Full Name, include a comment line above the Feature:
+    `# Owner: &lt;value provided&gt;`
+  - If the user provides Project, include:
+    `# Project: &lt;value provided&gt;`
+  - If the user provides Work Story ID / Work Item / User Story, include:
+    `# Work Item: &lt;value provided&gt;`
+  - If not provided, omit these comments entirely.
+
+6. **Preconditions**
+  - Every scenario must begin with clear, meaningful `Given` preconditions.
+  - Preconditions can include:
+   - Required test data setup
+   - Required configuration
+   - Prerequisite records
+   - Required user permissions
+   - Initial system state
+   - Environmental context (QA/UAT) ONLY if mentioned by user.
+
+7. **Steps Quality**
+  - Each step should be extremely descriptive and actionable.
+  - Mention:
+   - Specific UI actions in Salesforce (click, open, select, edit)
+   - API calls (if applicable)
+   - Data input values and dynamic values
+   - Validation triggers
+  - Avoid ambiguous actions.
+  - Write steps as if for a manual tester who must follow them exactly.
+
+8. **Expected Results**
+  - Declare expected results with `Then` and `And`.
+  - Expected results must be explicit and detailed.
+  - Cover:
+   - UI messages
+   - Field updates
+   - Record creation/modification
+   - Automation outcomes (Flow, Apex, Triggers, Validation)
+   - Error states
+   - API response behavior
+   - Data persistence
+   - Access/permission outcomes
+
+9. **Scenario Outline Rules**
+  - Use Scenario Outlines with Examples tables for:
+   - Boundary value testing
+   - Multiple input combinations
+   - Validation rules
+   - Negative test sets
+   - Multiple role/user types
+  - Example table should contain meaningful variable names.
+
+10. **Do NOT include the following:**
+  - No prose text outside Gherkin.
+  - No headers, no additional explanation.
+  - No blank placeholders.
+  - No generic statements like “system should work fine”.
+
+11. **Quality Expectations**
+  - The generated test suite MUST maximize coverage.
+  - Minimum number of scenarios: **at least 6**, more when requirement is large.
+  - Each scenario must be uniquely valuable—no duplicates or near-duplicates.
+
+Generate the output following all above rules.
+
+</content>
+        <inputs>
+            <apiName>requirement</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>requirement</masterLabel>
+            <referenceName>Input:requirement</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <versionIdentifier>k/hqsx1kvKnMLKaG1sacoh+rNf8X2pjszghPWQY2tCc=_2</versionIdentifier>
+    </templateVersions>
+    <type>einstein_gpt__flex</type>
+    <visibility>Global</visibility>
+</GenAiPromptTemplate>

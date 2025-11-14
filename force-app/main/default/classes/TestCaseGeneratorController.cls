@@ -22,9 +22,11 @@ public with sharing class TestCaseGeneratorController {
         // Call the service
         ConnectApi.EinsteinPromptTemplateGenerationsRepresentation generationsOutput;
         if(type == 'GUS'){
-            generationsOutput = ConnectApi.EinsteinLLM.generateMessagesForPromptTemplate('Test_Case_Generation_Template_Standard', promptGenerationsInput); 
+            generationsOutput = ConnectApi.EinsteinLLM.generateMessagesForPromptTemplate('Test_Case_Generation_Template_GUS', promptGenerationsInput); 
         }else if(type == 'Narwhale'){
             generationsOutput = ConnectApi.EinsteinLLM.generateMessagesForPromptTemplate('Test_Case_Generation_Template_Narwhale', promptGenerationsInput);
+        }else if(type == 'Gherkin'){
+            generationsOutput = ConnectApi.EinsteinLLM.generateMessagesForPromptTemplate('Test_Case_Generation_Template_Gherkin', promptGenerationsInput);
         }
                                         
         // Consume resolution
@@ -99,7 +101,7 @@ public with sharing class TestCaseGeneratorController {
         }
         /*==========================FOR NARWHALE=======================================================*/
         if(type == 'Narwhale'){
-            if (!rows.isEmpty() && rows[0].toLowerCase().contains('work id')) {
+            if (!rows.isEmpty() && rows[0].toLowerCase().contains('gus work item id')) {
                 rows.remove(0); // Remove the header row
             }
             for (String row : rows) {
@@ -111,52 +113,6 @@ public with sharing class TestCaseGeneratorController {
                 System.debug('columns = Size '+columns.size());
                 Map<String, String> record = new Map<String, String>();
 
-                /*for(Integer i=0;i<columns.size();i++){
-                    switch on i{
-                        when 0{
-                            record.put('workId', columns[i].trim());
-                        }
-                        
-                        when 1{
-                            record.put('testCaseName', columns[i].trim());
-                        }
-                        when 2{
-                            record.put('testCaseDetails', columns[i].trim());
-                        }
-                            
-                        when 3{
-                            record.put('detailSteps', columns[i].trim());
-                        }
-                            
-                        when 4{
-                            record.put('expectedResults', columns[i].trim());
-                        }
-                            
-                        when 5{
-                            record.put('executionStatus', columns[i].trim());
-                        }
-                            
-                        when 6{
-                            record.put('ownerName', columns[i].trim());
-                        }
-                            
-                        when 7{
-                            record.put('ownerId', columns[i].trim());
-                        }
-                            
-                        when 8{
-                            record.put('executionDate',columns[i].trim());
-                        }
-                            
-                        when 9{
-                            record.put('project',columns[i].trim());
-                        }
-                            
-                        when 10{
-                            record.put('uploadIdentifier',columns[i].trim());
-                        }
-                    }
-                }*/
                 for(Integer i=0;i<columns.size();i++){
                     switch on i{
                         when 0{
@@ -227,6 +183,97 @@ public with sharing class TestCaseGeneratorController {
                         }
                         when 11{
                             record.put('expectedResults',columns[i].trim());
+                        }
+                    }
+                }
+            output.add(record);
+            }
+        }
+        /*==========================FOR GHERKIN=======================================================*/
+        if(type == 'Gherkin'){
+            if (!rows.isEmpty() && rows[0].toLowerCase().contains('work item id')) {
+                rows.remove(0); // Remove the header row
+            }
+            for (String row : rows) {
+                System.debug('row =Apex '+row);
+                row = row.trim();
+                if (row == '') continue;
+                // Split each row using '|' as the delimiter
+                List<String> columns = row.split('\\|');
+                System.debug('columns = Size '+columns.size());
+                Map<String, String> record = new Map<String, String>();
+
+                for(Integer i=0;i<columns.size();i++){
+                    switch on i{
+                        when 0{
+                            record.put('featureName', columns[i].trim());
+                        }
+                        
+                        when 1{
+                            if(columns[i].trim() == 'Garbage'){
+                                record.put('scenarioId', '');
+                            }else{
+                                record.put('scenarioId', columns[i].trim());
+                            }
+                        }
+                        when 2{
+                            if(columns[i].trim() == 'Garbage'){
+                                record.put('scenarioName', '');
+                            }else{
+                                record.put('scenarioName', columns[i].trim());
+                            }
+                        }
+
+                        when 3{
+                            if(columns[i].trim() == 'Garbage'){
+                                record.put('scenarioType', '');
+                            }else{
+                                record.put('scenarioType', columns[i].trim());
+                            }
+                        }
+                            
+                        when 4{
+                            if(columns[i].trim() == 'Garbage'){
+                                record.put('givenSteps', '');
+                            }else{
+                                record.put('givenSteps', columns[i].trim());
+                            }
+                        }
+                            
+                        when 5{
+                            if(columns[i].trim() == 'Garbage'){
+                                record.put('whenSteps', '');
+                            }else{
+                                record.put('whenSteps', columns[i].trim());
+                            }
+                        }
+                            
+                        when 6{
+                            if(columns[i].trim() == 'Garbage'){
+                                record.put('thenSteps', '');
+                            }else{
+                                record.put('thenSteps', columns[i].trim());
+                            }
+                        }
+                        
+                        when 7{
+                            if(columns[i].trim() == 'Garbage'){
+                                record.put('examplesTable', '');
+                            }else{
+                                record.put('examplesTable', columns[i].trim());
+                            }
+                        }
+                            
+                        when 8{
+                            record.put('ownerName',columns[i].trim());
+                        }
+                            
+                        when 9{
+                            record.put('project',columns[i].trim());
+                        }
+                            
+                        when 10{
+                            record.put('workId',columns[i].trim());
                         }
                     }
                 }
